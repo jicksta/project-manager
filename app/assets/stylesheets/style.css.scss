@@ -1,0 +1,31 @@
+body,html {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.vertical-line {
+  background-color: red;
+  width: 3px;
+  height: 300px;
+  position: absolute;
+}
+
+.week {
+  display: inline-block;
+  width: 20%;
+  background-color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin: 0;
+  padding: 0;
+  color: white;
+  line-height: 20px;
+  + .week {
+    background-color: #555;
+    + .week {
+      background-color: #777;
+      
+    }
+  }
+}
+

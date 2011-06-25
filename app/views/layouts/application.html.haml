@@ -1,0 +1,10 @@
+!!! html
+%html
+  %head
+    %title Gantt
+    = csrf_meta_tags
+    = stylesheet_link_tag "application"
+    = yield :js_state
+    = javascript_include_tag "application"
+
+  %body= yield
