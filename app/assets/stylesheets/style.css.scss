@@ -20,12 +20,14 @@ body,html {
   padding: 0;
   color: white;
   line-height: 20px;
-  + .week {
-    background-color: #555;
-    + .week {
-      background-color: #777;
-      
-    }
-  }
+  + .week { background-color: #555; }
+  + .week + .week { background-color: #777; }
+  + .week + .week + .week { background-color: #999; }
+  + .week + .week + .week + .week { background-color: #bbb; }
 }
 
+.project {
+  background-color: yellow;
+  margin-top: 3px;
+  margin-left: 3px;
+}
