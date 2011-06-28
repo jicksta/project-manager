@@ -1,11 +1,13 @@
+$main-font-size: 20px;
+
 body,html {
   margin: 0;
   padding: 0;
 }
 
 #outer {
-  font-family: minion-pro-1,minion-pro-2, serif;
-  font-size: 20px;
+  font-family: obliqua-1,obliqua-2,sans-serif;
+  font-size: $main-font-size;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -23,7 +25,6 @@ body,html {
   left: 0;
 
   #gutter, #details {
-    padding: 5px;
     position: relative;
     top: 0;
     bottom: 0;
@@ -36,46 +37,72 @@ body,html {
   }
   #details {
     right: 0;
+    padding-top: 30px;
     width: 250px;
+    > div {
+      margin: 5px;
+    }
   }
 
   #timeline {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 100%;
     -webkit-box-flex: 1;
   }
 }
 
-
-
 .vertical-line {
-  background-color: red;
+  background-color: #003399;
   width: 3px;
-  height: 300px;
   position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 50;
 }
 
 .week {
+  border-bottom: 3px solid #003399;
   display: inline-block;
   width: 20%;
-  background-color: #333;
   text-align: center;
+  z-index: 100;
+  position: relative;
   text-transform: uppercase;
-  font-size: 11px;
   margin: 0;
-  padding: 0;
+  padding: 5px 0;
   color: white;
   line-height: 20px;
-  + .week { background-color: #555; }
-  + .week + .week { background-color: #777; }
-  + .week + .week + .week { background-color: #999; }
-  + .week + .week + .week + .week { background-color: #bbb; }
+  &.even { background-color: lighten(#5C5, 25%) }
+  &.odd { background-color: lighten(#5C5, 20%) }
 }
 
 .project {
+  cursor: default;
   text-align: center;
-  background-color: yellow;
-  -webkit-border-radius: 6px;
-  border: 3px double white;
-  font-size: 17px;
+  background-color: #5C5;
+  color: white;
+  position: relative;
+  display: block;
+  padding: 3px;
+  z-index: 75;
+  font-size: $main-font-size * 0.8;
   margin-top: 3px;
   margin-left: 3px;
+
+  $border-color: darken(#5C5, 10%);
+  border-right: $border-color 5px solid;
+  border-left: $border-color 5px solid;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+
+  &:hover {
+    border-color: black;
+  }
+}
+
+input[type=text] {
+  margin-right: 5px;
+  font-size: $main-font-size;
 }
