@@ -1,6 +1,50 @@
 body,html {
-  font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
+#outer {
+  font-family: minion-pro-1,minion-pro-2, serif;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#inner {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  #gutter, #details {
+    padding: 5px;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    background-color: #ccffff;
+  }
+
+  #gutter {
+    padding-right: 10px;
+    left: 0;
+  }
+  #details {
+    right: 0;
+    width: 250px;
+  }
+
+  #timeline {
+    -webkit-box-flex: 1;
+  }
+}
+
+
 
 .vertical-line {
   background-color: red;
@@ -27,7 +71,11 @@ body,html {
 }
 
 .project {
+  text-align: center;
   background-color: yellow;
+  -webkit-border-radius: 6px;
+  border: 3px double white;
+  font-size: 17px;
   margin-top: 3px;
   margin-left: 3px;
 }

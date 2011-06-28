@@ -4,7 +4,13 @@
     %title Gantt
     = csrf_meta_tags
     = stylesheet_link_tag "application"
+    = javascript_include_tag "http://use.typekit.com/jzq4kam.js"
+    :javascript
+      try{Typekit.load();}catch(e){}
     = yield :js_state
+
     = javascript_include_tag "application"
 
-  %body= yield
+  %body
+    #outer
+      #inner= yield
