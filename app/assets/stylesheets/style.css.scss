@@ -1,12 +1,12 @@
 $main-font-size: 20px;
-
+$pretty-font: obliqua-1,obliqua-2,sans-serif;
 body,html {
   margin: 0;
   padding: 0;
 }
 
 #outer {
-  font-family: obliqua-1,obliqua-2,sans-serif;
+  font-family: $pretty-font;
   font-size: $main-font-size;
   position: absolute;
   top: 0;
@@ -54,8 +54,8 @@ body,html {
 }
 
 .vertical-line {
-  background-color: #003399;
-  width: 3px;
+  border-left: 1px dotted #003399;
+  width: 0;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -63,7 +63,7 @@ body,html {
 }
 
 .week {
-  border-bottom: 3px solid #003399;
+  font-weight: bold;
   display: inline-block;
   width: 20%;
   text-align: center;
@@ -72,7 +72,7 @@ body,html {
   text-transform: uppercase;
   margin: 0;
   padding: 5px 0;
-  color: white;
+  color: black;
   line-height: 20px;
   &.even { background-color: lighten(#5C5, 25%) }
   &.odd { background-color: lighten(#5C5, 20%) }
@@ -90,19 +90,18 @@ body,html {
   font-size: $main-font-size * 0.8;
   margin-top: 3px;
   margin-left: 3px;
-
+  border-radius: 30px;
   $border-color: darken(#5C5, 10%);
-  border-right: $border-color 5px solid;
-  border-left: $border-color 5px solid;
-  border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
+  border: $border-color 5px solid;
 
   &:hover {
     border-color: black;
+    background-color: black;
   }
 }
 
 input[type=text] {
   margin-right: 5px;
   font-size: $main-font-size;
+  font-family: $pretty-font;
 }
