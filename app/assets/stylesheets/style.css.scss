@@ -50,6 +50,7 @@ body,html {
     bottom: 0;
     height: 100%;
     -webkit-box-flex: 1;
+    overflow-y: scroll;
   }
 }
 
@@ -72,10 +73,10 @@ body,html {
   text-transform: uppercase;
   margin: 0;
   padding: 5px 0;
-  color: black;
+  color: white;
   line-height: 20px;
-  &.even { background-color: lighten(#5C5, 25%) }
-  &.odd { background-color: lighten(#5C5, 20%) }
+  &.even { background-color: darken(#5C5, 25%) }
+  &.odd { background-color: darken(#5C5, 20%) }
 }
 
 .project {
