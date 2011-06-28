@@ -39,9 +39,10 @@ var Gantt = {};
     var weekWidthPercentage = 100 / numberOfWeeks;
     var dayWidthPercentage = weekWidthPercentage / 7;
 
-    var weeksContainer = $(".weeks");
+    var weeksContainer = $(".weeks"), nowOffset = NOW.getWeek() - earliestDate.getWeek();
     for (var i = 0; i < numberOfWeeks; i++) {
-      $("<div/>").addClass("week").text(i).appendTo(weeksContainer).css("width", weekWidthPercentage + "%").addClass((i % 2 == 0) ? "even" : "odd");
+      var weekDistance = i - nowOffset;
+      $("<div/>").addClass("week").text(weekDistance > 0 ? "+" + weekDistance : weekDistance).appendTo(weeksContainer).css("width", weekWidthPercentage + "%").addClass((i % 2 == 0) ? "even" : "odd");
     }
 
     var projectsContainer = $(".projects");
