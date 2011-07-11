@@ -14,6 +14,7 @@ group :assets do
   gem 'coffee-script'
   gem 'uglifier'
 end
+
 gem "haml"
 
 gem 'jquery-rails'

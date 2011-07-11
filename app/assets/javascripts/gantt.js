@@ -21,4 +21,8 @@ var Gantt = {Views: {}, Models: {}, Collections: {}};
     return now;
   };
 
+  Gantt.setTime = function(time) {
+    now = time;
+  }
+
 })();

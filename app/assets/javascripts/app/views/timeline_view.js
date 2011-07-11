@@ -77,7 +77,7 @@ Gantt.Views.TimelineView = Backbone.View.extend({
     _(self.projectViews).each(function(projectView) {
       var project = projectView.model;
 
-      var start = new Date(project.get("start")), end = new Date(project.get("end"));
+      var start = new Date(project.get("start_time")), end = new Date(project.get("end_time"));
       var lengthOfTimeInWeeks = end.getWeek() - start.getWeek();
 
       self.projectsContainer.append(projectView);

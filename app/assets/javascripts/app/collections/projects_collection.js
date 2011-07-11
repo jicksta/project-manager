@@ -16,7 +16,7 @@ Gantt.Collections.ProjectsCollection = Backbone.Collection.extend({
   },
 
   _allDates: function() {
-    return this.pluck("start").concat(this.pluck("end"));
+    return this.pluck("start_time").concat(this.pluck("end_time"));
   }
 
 });
