@@ -6,7 +6,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ./vendor/underscore
+//= require ./vendor/backbone
 //= require_tree ./vendor
+//= require gantt
+//= require_tree ./app/models
+//= require_tree ./app/collections
 //= require_tree .
-
-$(Gantt.init);

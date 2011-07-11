@@ -4,14 +4,32 @@
   .vertical-line
   .weeks><
   .projects
+  .zoom-buttons
+    %button.zoom-in +
+    %button.zoom-out -
 
 #details
   %div
     %input{:type => "text", :name => "title"}
   %div
-    %button#zoom-in +
-    %button#zoom-out -
+
 
 - content_for :js_state do
   :javascript
-    var NOW = new Date("#{Time.now.rfc2822}");
+    var PROJECTS_JSON = [
+        {"name": "engineer world-class web-readiness", "start": "Mon, 02 May 2011 19:35:16 -0700", "end": "Mon, 16 May 2011 19:35:16 -0700"},
+        {"name": "unleash impactful platforms", "start": "Mon, 09 May 2011 19:35:16 -0700", "end": "Mon, 23 May 2011 19:35:16 -0700"},
+        {"name": "generate visionary synergies", "start": "Mon, 16 May 2011 19:35:16 -0700", "end": "Mon, 30 May 2011 19:35:16 -0700"},
+        {"name": "mesh cross-media interfaces", "start": "Mon, 23 May 2011 19:35:16 -0700", "end": "Mon, 06 Jun 2011 19:35:16 -0700"},
+        {"name": "morph value-added communities", "start": "Mon, 30 May 2011 19:35:16 -0700", "end": "Mon, 13 Jun 2011 19:35:16 -0700"},
+        {"name": "integrate scalable vortals", "start": "Mon, 06 Jun 2011 19:35:16 -0700", "end": "Mon, 20 Jun 2011 19:35:16 -0700"},
+        {"name": "optimize open-source systems", "start": "Mon, 13 Jun 2011 19:35:16 -0700", "end": "Mon, 27 Jun 2011 19:35:16 -0700"},
+        {"name": "incubate back-end content", "start": "Mon, 20 Jun 2011 19:35:16 -0700", "end": "Mon, 04 Jul 2011 19:35:16 -0700"}
+      ];
+
+    // var NOW = new Date("#{Time.now.rfc2822}");
+
+:javascript
+  $(function() {
+    new Gantt.Views.TimelineView({projects: PROJECTS_JSON, el: document.getElementById("timeline")}).render();
+  });
