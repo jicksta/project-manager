@@ -1,8 +1,14 @@
 $main-font-size: 20px;
 $pretty-font: obliqua-1,obliqua-2,sans-serif;
+
+$color-main-background: black;
+$color-vertical-line: yellow;
+$color-project-background: #333;
+$color-sidebars: #aaa;
 body,html {
   margin: 0;
   padding: 0;
+  background-color: $color-main-background;
 }
 
 #outer {
@@ -28,11 +34,11 @@ body,html {
     position: relative;
     top: 0;
     bottom: 0;
-    background-color: #ccffff;
+    background-color: $color-sidebars;
   }
 
   #gutter {
-    padding-right: 10px;
+    padding-right: 30px;
     left: 0;
   }
 
@@ -56,7 +62,7 @@ body,html {
 }
 
 .vertical-line {
-  border-left: 1px dotted #003399;
+  border-left: 1px dotted $color-vertical-line;
   width: 0;
   position: absolute;
   top: 0;
@@ -82,8 +88,8 @@ body,html {
     padding: 5px 0;
     color: white;
     line-height: 20px;
-    &.even { background-color: darken(#5C5, 25%) }
-    &.odd { background-color: darken(#5C5, 20%) }
+    &.even { background-color: darken($color-vertical-line, 25%) }
+    &.odd { background-color: darken($color-vertical-line, 20%) }
   }
 
 }
@@ -92,8 +98,8 @@ body,html {
 .project {
   cursor: default;
   text-align: center;
-  background-color: #5C5;
-  color: white;
+  background-color: $color-project-background;
+  color: #eaeaea;
   position: relative;
   display: block;
   padding: 3px;
@@ -101,18 +107,18 @@ body,html {
   font-size: $main-font-size * 0.8;
   margin-top: 3px;
   margin-left: 3px;
-  $border-color: darken(#5C5, 10%);
-  border: $border-color 3px solid;
+  border: darken($color-project-background, 10%) 2px solid;
   box-sizing: border-box;
 
   &:hover {
-    border-color: black;
-    background-color: black;
+    border-color: white;
+    background-color: white;
+    color: black;
   }
 }
 
 input[type=text] {
-  margin-right: 5px;
+  width: 200px;
   font-size: $main-font-size;
   font-family: $pretty-font;
 }
