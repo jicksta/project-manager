@@ -35,6 +35,7 @@ body,html {
     padding-right: 10px;
     left: 0;
   }
+
   #details {
     right: 0;
     padding-top: 30px;
@@ -63,21 +64,30 @@ body,html {
   z-index: 50;
 }
 
-.week {
-  font-weight: bold;
-  display: inline-block;
-  width: 20%;
-  text-align: center;
-  z-index: 100;
-  position: relative;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 5px 0;
-  color: white;
-  line-height: 20px;
-  &.even { background-color: darken(#5C5, 25%) }
-  &.odd { background-color: darken(#5C5, 20%) }
+
+
+.weeks {
+
+  white-space: nowrap;
+
+  .week {
+    font-weight: bold;
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    z-index: 100;
+    position: relative;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 5px 0;
+    color: white;
+    line-height: 20px;
+    &.even { background-color: darken(#5C5, 25%) }
+    &.odd { background-color: darken(#5C5, 20%) }
+  }
+
 }
+
 
 .project {
   cursor: default;
@@ -91,9 +101,9 @@ body,html {
   font-size: $main-font-size * 0.8;
   margin-top: 3px;
   margin-left: 3px;
-  border-radius: 30px;
   $border-color: darken(#5C5, 10%);
-  border: $border-color 5px solid;
+  border: $border-color 3px solid;
+  box-sizing: border-box;
 
   &:hover {
     border-color: black;

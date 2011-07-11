@@ -4,6 +4,8 @@ var Gantt = {};
 
   var NOW = new Date("Mon, 27 Jun 2011 19:35:16 -0700");
 
+  var DEFAULT_WEEKS_IN_VIEW = 6;
+
   var projects = _([
     {"name": "engineer world-class web-readiness", "start": "Mon, 02 May 2011 19:35:16 -0700", "end": "Mon, 16 May 2011 19:35:16 -0700"},
     {"name": "unleash impactful platforms", "start": "Mon, 09 May 2011 19:35:16 -0700", "end": "Mon, 23 May 2011 19:35:16 -0700"},
@@ -19,50 +21,85 @@ var Gantt = {};
     newInit(projects);
   };
 
+  var nowMarker, projectViews, projectsContainer, weeks = [], weeksContainer, earliestDate, latestDate;
+
+  var currentZoom;
 
   function newInit(projects) {
+
+    weeksContainer = $(".weeks"), nowMarker = $(".vertical-line");
 
     var allDateStrings = projects.pluck("start").concat(projects.pluck("end"));
     var allDates = _.map(allDateStrings, function(dateString) {
       return new Date(dateString);
     });
 
-    var earliestDate = _.min(allDates, function(date) {
-      return Math.min(NOW, date);
-    });
-    var latestDate   = _.max(allDates, function(date) {
-      return Math.max(NOW, date);
-    });
+    earliestDate = _.min(allDates, function(date) { return Math.min(NOW, date); });
+    latestDate   = _.max(allDates, function(date) { return Math.max(NOW, date); });
 
     var numberOfWeeks = 1 + latestDate.getWeek() - earliestDate.getWeek();
 
-    var weekWidthPercentage = 100 / numberOfWeeks;
-    var dayWidthPercentage = weekWidthPercentage / 7;
+    var weekNumberingOffsetFromNow = NOW.getWeek() - earliestDate.getWeek();
 
-    var weeksContainer = $(".weeks"), nowOffset = NOW.getWeek() - earliestDate.getWeek();
     for (var i = 0; i < numberOfWeeks; i++) {
-      var weekDistance = i - nowOffset;
-      $("<div/>").addClass("week").text(weekDistance > 0 ? "+" + weekDistance : weekDistance).appendTo(weeksContainer).css("width", weekWidthPercentage + "%").addClass((i % 2 == 0) ? "even" : "odd");
+      var weekDistance = i - weekNumberingOffsetFromNow;
+      var week = $("<div/>")
+          .addClass("week")
+          .text(weekDistance > 0 ? "+" + weekDistance : weekDistance)
+          .appendTo(weeksContainer)
+          .addClass((i % 2 == 0) ? "even" : "odd");
+      weeks.push(week);
     }
 
-    var projectsContainer = $(".projects");
-    projects.each(function(project) {
-      var start = new Date(project.start), end = new Date(project.end);
+    projectsContainer = $(".projects").hide();
 
-      var projectView = $("<div/>").addClass("project");
+    projectViews = projects.map(function(project) {
+      var projectView = $("<div/>").addClass("project").data("project", project);
       projectView.text(project.name);
+      projectsContainer.append(projectView);
+      return projectView;
+    });
 
+    setZoom(DEFAULT_WEEKS_IN_VIEW);
+
+    $("#zoom-in").click(function() {
+      var newZoom = Math.max(1, currentZoom - 1);
+      setZoom(newZoom);
+    });
+
+    $("#zoom-out").click(function() {
+      setZoom(currentZoom + 1);
+    });
+
+    projectsContainer.show();
+
+  }
+
+  function setZoom(numberOfWeeksInView) {
+    var weekWidthPercentage = 100 / numberOfWeeksInView;
+    var dayWidthPercentage = weekWidthPercentage / 7;
+
+    _(weeks).each(function(week) {
+      week.css("width", weekWidthPercentage + "%")
+    });
+
+    _(projectViews).each(function(projectView) {
+      var project = projectView.data("project");
+
+      var start = new Date(project.start), end = new Date(project.end);
       var lengthOfTimeInWeeks = end.getWeek() - start.getWeek();
 
       projectsContainer.append(projectView);
+
       projectView.css({
         width: (weekWidthPercentage * lengthOfTimeInWeeks) + "%",
-        "left": leftOffset(start)
+        left: leftOffset(start)
       });
+
+      nowMarker.css("left", leftOffset(NOW));
     });
 
-    var nowMarker = $(".vertical-line");
-    nowMarker.css("left", leftOffset(NOW));
+    currentZoom = numberOfWeeksInView;
 
     function leftOffset(date) {
       return ((date.getWeek() - earliestDate.getWeek()) * weekWidthPercentage) + (date.getDay() * dayWidthPercentage) + "%";
