@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require ./vendor/underscore
 //= require ./vendor/backbone
+//= require ./bindings
 //= require_tree ./vendor
 //= require gantt
 //= require_tree ./app/models

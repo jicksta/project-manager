@@ -1,6 +1,6 @@
-#gutter
+.gutter
 
-#timeline
+.timeline
   .vertical-line
   .weeks><
   .projects
@@ -8,23 +8,26 @@
     %button.zoom-in +
     %button.zoom-out -
 
-#details
+.details
   %div
-    %input{:type => "text", :name => "title"}
-  %div
+    %button.new-project{:type => "button"} New Project
 
+  %div.project-data
+    %input.project-title{"data-binding" => "name"}
+  %div
 
 - content_for :js_state do
   :javascript
     var PROJECTS_JSON = #{@projects.to_json};
 
-
-
 :javascript
   $(function() {
     Gantt.setTime(new Date("#{Time.now.rfc2822}"));
+
+    var timelineParentElement = $(".timeline:first").get();
     Gantt.timeline = new Gantt.Views.TimelineView({
       projects: PROJECTS_JSON,
-      el: document.getElementById("timeline")
+      el: timelineParentElement
     }).render();
+
   });

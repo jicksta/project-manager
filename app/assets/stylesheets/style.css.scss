@@ -1,3 +1,6 @@
+@import "compass/reset";
+@import "compass/css3";
+
 $main-font-size: 20px;
 $pretty-font: obliqua-1,obliqua-2,sans-serif;
 
@@ -5,6 +8,7 @@ $color-main-background: black;
 $color-vertical-line: yellow;
 $color-project-background: #333;
 $color-sidebars: #aaa;
+
 body,html {
   margin: 0;
   padding: 0;
@@ -22,27 +26,27 @@ body,html {
 }
 
 #inner {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
+  @include display-box;
+  @include box-orient(horizontal);
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 
-  #gutter, #details {
+  .gutter, .details {
     position: relative;
     top: 0;
     bottom: 0;
     background-color: $color-sidebars;
   }
 
-  #gutter {
+  .gutter {
     padding-right: 30px;
     left: 0;
   }
 
-  #details {
+  .details {
     right: 0;
     padding-top: 30px;
     width: 250px;
@@ -51,12 +55,12 @@ body,html {
     }
   }
 
-  #timeline {
+  .timeline {
     position: relative;
     top: 0;
     bottom: 0;
     height: 100%;
-    -webkit-box-flex: 1;
+    @include box-flex(1);
     overflow-y: scroll;
 
     .zoom-buttons {

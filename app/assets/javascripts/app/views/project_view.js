@@ -7,8 +7,10 @@ Gantt.Views.ProjectView = Backbone.View.extend({
   },
 
   render: function() {
-    var name = this.model.get("name");
-    $(this.el).text(name);
+    $(this.el).attr("data-binding", "name");
+    this.viewBindings();
     return this;
   }
 });
+
+_.extend(Gantt.Views.ProjectView.prototype, Bindings);
