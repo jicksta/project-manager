@@ -4,17 +4,24 @@
 $main-font-size: 20px;
 $pretty-font: obliqua-1,obliqua-2,sans-serif;
 
-$color-main-background: black;
-$color-vertical-line: yellow;
+$color-main-background: white;
+$color-vertical-line: red;
+$color-sidebars-background: #b8e0e0;
+$color-sidebars-foreground: #ccc;
+
 $color-project-background: #333;
-$color-sidebars: #aaa;
+$color-project-foreground: white;
+$color-project-border: darken($color-project-background, 10%);
+$color-project-border-hover: red;
+$color-project-background-hover: red;
+$color-project-foreground-hover: white;
 
 body,html {
   margin: 0;
   padding: 0;
   background-color: $color-main-background;
 }
-
+  
 #outer {
   font-family: $pretty-font;
   font-size: $main-font-size;
@@ -38,7 +45,8 @@ body,html {
     position: relative;
     top: 0;
     bottom: 0;
-    background-color: $color-sidebars;
+    color: $color-sidebars-foreground;
+    background-color: $color-sidebars-background;
   }
 
   .gutter {
@@ -109,7 +117,7 @@ body,html {
   cursor: default;
   text-align: center;
   background-color: $color-project-background;
-  color: #eaeaea;
+  color: $color-project-foreground;
   position: relative;
   display: block;
   padding: 3px;
@@ -117,13 +125,13 @@ body,html {
   font-size: $main-font-size * 0.8;
   margin-top: 3px;
   margin-left: 3px;
-  border: darken($color-project-background, 10%) 2px solid;
+  border: $color-project-border 2px solid;
   box-sizing: border-box;
 
   &:hover {
-    border-color: white;
-    background-color: white;
-    color: black;
+    border-color: $color-project-border-hover;
+    background-color: $color-project-background-hover;
+    color: $color-project-foreground-hover;
   }
 }
 

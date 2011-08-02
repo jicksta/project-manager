@@ -61,7 +61,6 @@ var Bindings = {};
         element.val(value);
       } else {
         if(value === "" || value === null || value === undefined) {
-          console.log("nbsp")
           element.html("&nbsp;");
         } else {
           element.text(value);
