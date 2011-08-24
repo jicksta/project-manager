@@ -44,6 +44,7 @@ stylesheets:
 #
 helpers:
   - helpers/**/*.js
+  - SpecHelper.js
 
 # spec_files
 #

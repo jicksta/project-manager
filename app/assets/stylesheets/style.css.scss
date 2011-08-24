@@ -1,5 +1,5 @@
-@import "compass/reset";
-@import "compass/css3";
+/*@import "compass/reset";*/
+/*@import "compass/css3";*/
 
 $main-font-size: 20px;
 $pretty-font: obliqua-1,obliqua-2,sans-serif;
@@ -10,7 +10,7 @@ $color-sidebars-background: #b8e0e0;
 $color-sidebars-foreground: #ccc;
 
 $color-project-background: #333;
-$color-project-foreground: white;
+$color-project-foreground: #ddd;
 $color-project-border: darken($color-project-background, 10%);
 $color-project-border-hover: red;
 $color-project-background-hover: red;
@@ -30,6 +30,26 @@ body,html {
   bottom: 0;
   right: 0;
   left: 0;
+}
+
+// TODO: Use compass for this
+@mixin display-box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+}
+
+// TODO: Use compass for this
+@mixin box-orient($orientation) {
+  -webkit-box-orient: $orientation;
+  -moz-box-orient: $orientation;
+  box-orient: $orientation;
+}
+
+@mixin box-flex($flex) {
+  -webkit-box-flex: $flex;
+  -moz-box-flex: $flex;
+  box-flex: $flex;
 }
 
 #inner {
@@ -128,11 +148,13 @@ body,html {
   border: $color-project-border 2px solid;
   box-sizing: border-box;
 
+  /*
   &:hover {
     border-color: $color-project-border-hover;
     background-color: $color-project-background-hover;
     color: $color-project-foreground-hover;
   }
+  */
 }
 
 input[type=text] {

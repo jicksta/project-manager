@@ -6,7 +6,7 @@ Gantt.Views.TimelineView = Backbone.View.extend({
   },
 
   DEFAULT_WEEKS_IN_VIEW: 5,
-  
+
   initialize: function(options) {
     var self = this;
 
@@ -28,8 +28,13 @@ Gantt.Views.TimelineView = Backbone.View.extend({
     self.detailsContainer = $(".details");
 
     renderWeeks();
-    renderProjects();
-    
+
+    self.projectViews = self.projects.map(function(project) {
+      var projectView = new Gantt.Views.ProjectView({model: project});
+      self.projectsContainer.append(projectView.el);
+      return projectView;
+    });
+
     self._setZoom(self.DEFAULT_WEEKS_IN_VIEW);
 
     self.projectsContainer.show();
@@ -40,10 +45,10 @@ Gantt.Views.TimelineView = Backbone.View.extend({
     }).render();
 
     return self;
-    
+
     function renderWeeks() {
       for (var i = 0; i < self.numberOfWeeks; i++) {
-        var weekDistance = i - self.weekNumberingOffsetFromNow; 
+        var weekDistance = i - self.weekNumberingOffsetFromNow;
         var week = $("<div/>")
             .addClass("week")
             .text(weekDistance > 0 ? "+" + weekDistance : weekDistance)
@@ -51,14 +56,6 @@ Gantt.Views.TimelineView = Backbone.View.extend({
             .addClass((i % 2 == 0) ? "even" : "odd");
         self.weeks.push(week);
       }
-    }
-
-    function renderProjects() {
-      self.projectViews = self.projects.map(function(project) {
-        var projectView = new Gantt.Views.ProjectView({model: project}).render();
-        self.projectsContainer.append(projectView.el);
-        return projectView;
-      });
     }
   },
 
@@ -73,6 +70,8 @@ Gantt.Views.TimelineView = Backbone.View.extend({
 
   _setZoom: function(numberOfWeeksInView) {
     var self = this;
+    var numberOfDaysInView = 7 * numberOfWeeksInView;
+
     self.currentZoom = numberOfWeeksInView;
 
     var weekWidthPercentage = 100 / numberOfWeeksInView;
@@ -84,14 +83,9 @@ Gantt.Views.TimelineView = Backbone.View.extend({
     _(self.projectViews).each(function(projectView) {
       var project = projectView.model;
 
-      var start = new Date(project.get("start_time")), end = new Date(project.get("end_time"));
-      var lengthOfTimeInWeeks = end.getWeek() - start.getWeek();
-
-      self.projectsContainer.append(projectView);
-
-      $(projectView.el).css({
-        width: (weekWidthPercentage * lengthOfTimeInWeeks) + "%",
-        left: leftOffset(start)
+      projectView.render({
+        widthPercentage: dayWidthPercentage * project.lengthOfTimeInDays(),
+        startOffsetPercentage: leftOffset(project.get("start_time"))
       });
 
       self.nowMarker.css("left", leftOffset(Gantt.now()));

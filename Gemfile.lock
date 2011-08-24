@@ -1,13 +1,3 @@
-GIT
-  remote: git://github.com/chriseppstein/compass.git
-  revision: 91a748a916360057b5caf6ea85cd38441d3b257a
-  branch: rails31
-  specs:
-    compass (0.12.0.alpha.0.91a748a)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -54,7 +44,6 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.2.0)
       ffi (~> 1.0.6)
-    chunky_png (1.2.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -65,7 +54,6 @@ GEM
     execjs (1.2.1)
       multi_json (~> 1.0)
     ffi (1.0.9)
-    fssm (0.2.7)
     haml (3.1.2)
     hike (1.2.0)
     i18n (0.6.0)
@@ -175,9 +163,8 @@ PLATFORMS
 DEPENDENCIES
   capybara
   coffee-script
-  compass!
   haml
-  jasmine
+  jasmine (= 1.0.2.1)
   jquery-rails
   rails (~> 3.1.0.rc5)
   rr
