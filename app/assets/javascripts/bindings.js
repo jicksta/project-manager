@@ -2,7 +2,7 @@ var Bindings = {};
 (function(ns) {
 
   var SELECTORS = {
-    textFields: "input:text[data-binding]",
+    textFields: "input[data-binding]",
     withBindings: "[data-binding]"
   };
 
@@ -36,6 +36,7 @@ var Bindings = {};
     return this;
   };
 
+  // JavaScript doesn't provide a literal to get an object with a dynamic key.
   function kvp(key, value) {
     var pair = {};
     pair[key] = value;
@@ -60,7 +61,7 @@ var Bindings = {};
       if (element.is(":text")) {
         element.val(value);
       } else {
-        if(value === "" || value === null || value === undefined) {
+        if (value === "" || value === null || value === undefined) {
           element.html("&nbsp;");
         } else {
           element.text(value);

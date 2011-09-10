@@ -7,9 +7,14 @@ Gantt.Views.DetailsView = Backbone.View.extend({
 
   initialize: function() {
     _.bindAll(this, "newProject", "_updateTitle");
+    this.template = _.template($("#template-project-details").html());
   },
 
   render: function() {
+    var newHTML = this.template(this.model.toJSON());
+    $(this.el).html(newHTML);
+
+    this.delegateEvents();
     this.viewBindings();
     
     this.titleField = this.$(".project-title");

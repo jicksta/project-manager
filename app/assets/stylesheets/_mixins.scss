@@ -1,0 +1,20 @@
+@mixin display-box {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+}
+
+@mixin box-orient($direction) {
+  -moz-box-orient: $direction;
+  -webkit-box-orient: $direction;
+  -ms-box-orient: $direction;
+  box-orient: $direction;
+}
+
+@mixin box-flex($flex-amount) {
+  -moz-box-flex: $flex-amount;
+  -webkit-box-flex: $flex-amount;
+  -ms-box-flex: $flex-amount;
+  box-flex: $flex-amount;
+}

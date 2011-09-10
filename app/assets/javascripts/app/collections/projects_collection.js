@@ -6,7 +6,6 @@ Gantt.Collections.ProjectsCollection = Backbone.Collection.extend({
     return _.min(this._allDates(), function(date) {
       return Math.min(Gantt.now(), date);
     });
-
   },
 
   latestDate: function() {

@@ -5,11 +5,14 @@ class WelcomeController < ApplicationController
            "optimize open-source systems", "incubate back-end content"]
 
   def index
-
     @projects = NAMES.map.with_index do |name, index|
       start_time = ((NAMES.length / 2) - index).weeks.ago
       length_of_project_in_days = rand(7 * 4) + 1
-      Project.new name: name, start_time: start_time, end_time: start_time + length_of_project_in_days.days
+      end_time = start_time + length_of_project_in_days.days
+      puts "%s => %s : %s" % [start_time, end_time, name]
+      Project.new(name: name,
+                  start_time: start_time,
+                  end_time: end_time)
     end
 
   end

@@ -11,12 +11,19 @@
 #   - dist/**/*.js
 #
 src_files:
-  - public/javascripts/prototype.js
-  - public/javascripts/effects.js
-  - public/javascripts/controls.js
-  - public/javascripts/dragdrop.js
-  - public/javascripts/application.js
-  - public/javascripts/**/*.js
+  - app/assets/javascripts/vendor/extensions.js
+  - app/assets/javascripts/vendor/Date.js
+  - app/assets/javascripts/vendor/jquery.js
+  - app/assets/javascripts/vendor/jquery-ui-1.8.13.custom.min.js
+  - app/assets/javascripts/vendor/rails.js
+  - app/assets/javascripts/vendor/underscore.js
+  - app/assets/javascripts/vendor/backbone.js
+  - app/assets/javascripts/bindings.js
+  - app/assets/javascripts/gantt.js
+  - app/assets/javascripts/app/models/**/*.js
+  - app/assets/javascripts/app/collections/**/*.js
+  - app/assets/javascripts/app/views/**/*.js
+  - app/assets/javascripts/app/**/*.js
 
 # stylesheets
 #
@@ -44,7 +51,6 @@ stylesheets:
 #
 helpers:
   - helpers/**/*.js
-  - SpecHelper.js
 
 # spec_files
 #
