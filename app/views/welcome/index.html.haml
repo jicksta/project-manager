@@ -14,7 +14,7 @@
 
 %script#template-project-details{:type => "text/template"}
   .project-details
-    %input.project-title{"data-binding" => "name"}
+    %input.project-title{"data-binding" => "name", "type" => "text"}
 
 - content_for :js_state do
   :javascript

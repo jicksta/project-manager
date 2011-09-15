@@ -1,39 +1,46 @@
 var Bindings = {};
 (function(ns) {
 
-  var SELECTORS = {
-    textFields: "input[data-binding]",
-    withBindings: "[data-binding]"
-  };
-
-//  ns.$fnMixin = { typedVal: typedVal };
+  var SELECTORS = {};
+  SELECTORS.hasBinding = "[data-binding]";
+  SELECTORS.textFields = "input" + SELECTORS.hasBinding;
 
   ns.viewBindings = function viewBindings() {
-    var el = this.el,
-        $el = $(this.el),
+    var $el = $(this.el),
         model = this.model;
 
-    $el.delegate(SELECTORS.textFields, "keyup", function() {
-      var modelAttribute = this.getAttribute("data-binding"),
-           valueFromView = typedVal.call(this);
-
-      model.set(kvp(modelAttribute, valueFromView), {avoidCycles: this});
-    });
-
-    var elementsWithBindings = $el.find(SELECTORS.withBindings);
-    if ($el.is(SELECTORS.withBindings)) elementsWithBindings = elementsWithBindings.andSelf();
-
-    elementsWithBindings.each(function() {
-      var element = this,
-          modelAttribute = element.getAttribute("data-binding");
-      model.bind("change:" + modelAttribute, function(model, newValue, options) {
-        if (options.avoidCycles != element) typedVal.call(element, newValue);
-      });
-
-      typedVal.call(element, model.get(modelAttribute));
-    });
+    viewChangesDirectModelChanges();
+    modelChangesDirectViewChanges();
 
     return this;
+
+    function viewChangesDirectModelChanges() {
+      $el.delegate(SELECTORS.textFields, {
+        keyup: function() {
+          var modelAttribute = this.getAttribute("data-binding"),
+              valueFromView = typedVal.call(this);
+
+          model.set(kvp(modelAttribute, valueFromView), {avoidCycles: this});
+        }
+      });
+    }
+
+    function modelChangesDirectViewChanges() {
+      var elementsWithBindings = $el.find(SELECTORS.hasBinding);
+      if ($el.is(SELECTORS.hasBinding)) elementsWithBindings = elementsWithBindings.andSelf();
+
+      elementsWithBindings.each(function() {
+        var element = this,
+            modelAttribute = element.getAttribute("data-binding");
+        model.bind("change:" + modelAttribute, function(model, newValue, options) {
+          if (options.avoidCycles != element) typedVal.call(element, newValue);
+        });
+
+        typedVal.call(element, model.get(modelAttribute));
+      });
+
+    }
+
   };
 
   // JavaScript doesn't provide a literal to get an object with a dynamic key.

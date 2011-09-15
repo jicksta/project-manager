@@ -1,12 +1,7 @@
-//beforeEach(function() {
-//  this.addMatchers({
-//    toBePlaying: function(expectedSong) {
-//      var player = this.actual;
-//      return player.currentlyPlayingSong === expectedSong &&
-//             player.isPlaying;
-//    }
-//  });
-//});
+beforeEach(function() {
+  $("#jasmine_content").empty().unbind();
+  Gantt.unbind();
+});
 
 function kvp(key,value) {
   var pair = {};
