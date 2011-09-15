@@ -11,7 +11,7 @@ Gantt.Views.ProjectView = Backbone.View.extend({
   },
 
   openDetails: function() {
-    Gantt.trigger("ShowProjectDetails", this.model);
+    Gantt.trigger("gantt:show-event", this.model);
   },
 
   render: function(renderParams) {

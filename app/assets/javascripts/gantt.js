@@ -12,7 +12,7 @@ function i(what) {
   return what;
 }
 
-var Gantt = {Views: {}, Models: {}, Collections: {}};
+var Gantt = {Views: {}, Models: {}, Collections: {}, Presenters: {}};
 _.extend(Gantt, Backbone.Events);
 
 (function(ns) {

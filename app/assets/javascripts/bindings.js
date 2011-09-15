@@ -15,7 +15,7 @@ var Bindings = {};
 
     $el.delegate(SELECTORS.textFields, "keyup", function() {
       var modelAttribute = this.getAttribute("data-binding"),
-          valueFromView = typedVal.call(this);
+           valueFromView = typedVal.call(this);
 
       model.set(kvp(modelAttribute, valueFromView), {avoidCycles: this});
     });
