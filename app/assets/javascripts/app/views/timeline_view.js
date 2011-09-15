@@ -25,7 +25,6 @@ Gantt.Views.TimelineView = Backbone.View.extend({
     self.projectsContainer = self.$(".projects").hide();
     self.weeksContainer = self.$(".weeks");
     self.nowMarker = self.$(".vertical-line");
-    self.detailsContainer = $(".details");
 
     renderWeeks();
 
@@ -39,11 +38,8 @@ Gantt.Views.TimelineView = Backbone.View.extend({
 
     self.projectsContainer.show();
 
-    self.detailsView = new Gantt.Views.DetailsView({
-      el: self.detailsContainer.get(),
-      model: self.projects.first()
-    }).render();
-
+    Gantt.trigger("ShowProjectDetails", self.projects.first());
+    
     return self;
 
     function renderWeeks() {

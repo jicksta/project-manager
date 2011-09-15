@@ -12,9 +12,9 @@
   %div
     %button.new-project{:type => "button"} New Project
 
-  %div.project-data
-    %input.project-title{"data-binding" => "name"}
-  %div
+%script#template-project-details{:type => "text/template"}
+  .project-details
+    %input.project-title{"data-binding" => "name", "type" => "text"}
 
 - content_for :js_state do
   :javascript
@@ -22,12 +22,8 @@
 
 :javascript
   $(function() {
-    Gantt.setTime(new Date("#{Time.now.rfc2822}"));
-
-    var timelineParentElement = $(".timeline:first").get();
-    Gantt.timeline = new Gantt.Views.TimelineView({
-      projects: PROJECTS_JSON,
-      el: timelineParentElement
-    }).render();
-
+    // Gantt.setTime(new Date("#{Time.now.rfc2822}"));
+    
+    Gantt.trigger("init:details");
+    Gantt.trigger("init:timeline");
   });

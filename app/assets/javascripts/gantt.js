@@ -12,17 +12,18 @@ function i(what) {
   return what;
 }
 
-var Gantt = {Views: {}, Models: {}, Collections: {}};
+var Gantt = {Views: {}, Models: {}, Collections: {}, Presenters: {}};
+_.extend(Gantt, Backbone.Events);
 
-(function() {
+(function(ns) {
   var now = new Date("Mon, 27 Jun 2011 19:35:16 -0700");
 
-  Gantt.now = function() {
+  ns.now = function() {
     return now;
   };
 
-  Gantt.setTime = function(time) {
+  ns.setTime = function(time) {
     now = time;
   }
-
-})();
+  
+})(Gantt);

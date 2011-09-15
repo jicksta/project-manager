@@ -3,13 +3,29 @@
   %head
     %title Gantt
     = csrf_meta_tags
-    = stylesheet_link_tag "application"
-    = javascript_include_tag "http://use.typekit.com/jzq4kam.js"
-    :javascript
-      try{Typekit.load();}catch(e){}
-    = yield :js_state
 
-    = javascript_include_tag "application"
+    = stylesheet_link_tag "application"
+
+    = javascript_include_tag "vendor/extensions"
+    = javascript_include_tag "vendor/jquery"
+    = javascript_include_tag "vendor/jquery-ui-1.8.13.custom.min"
+    = javascript_include_tag "vendor/rails"
+    = javascript_include_tag "vendor/underscore"
+    = javascript_include_tag "vendor/backbone"
+    = javascript_include_tag "vendor/Date"
+    = javascript_include_tag "bindings"
+    = javascript_include_tag "gantt"
+    = javascript_include_tag "app/models/project"
+    = javascript_include_tag "app/collections/projects_collection"
+    = javascript_include_tag "app/views/details_view"
+    = javascript_include_tag "app/views/project_view"
+    = javascript_include_tag "app/views/timeline_view"
+    = javascript_include_tag "app/details"
+    = javascript_include_tag "app/timeline"
+
+    =# render "layouts/typekit"
+    
+    = yield :js_state
 
   %body
     #outer

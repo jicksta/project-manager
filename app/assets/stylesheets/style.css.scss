@@ -1,5 +1,6 @@
 /*@import "compass/reset";*/
 /*@import "compass/css3";*/
+@import "mixins";
 
 $main-font-size: 20px;
 $pretty-font: obliqua-1,obliqua-2,sans-serif;
@@ -32,29 +33,10 @@ body,html {
   left: 0;
 }
 
-// TODO: Use compass for this
-@mixin display-box {
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-}
-
-// TODO: Use compass for this
-@mixin box-orient($orientation) {
-  -webkit-box-orient: $orientation;
-  -moz-box-orient: $orientation;
-  box-orient: $orientation;
-}
-
-@mixin box-flex($flex) {
-  -webkit-box-flex: $flex;
-  -moz-box-flex: $flex;
-  box-flex: $flex;
-}
-
 #inner {
   @include display-box;
   @include box-orient(horizontal);
+
   position: absolute;
   top: 0;
   right: 0;
@@ -134,27 +116,20 @@ body,html {
 
 
 .project {
-  cursor: default;
-  text-align: center;
   background-color: $color-project-background;
   color: $color-project-foreground;
+  font-size: $main-font-size * 0.8;
+  border: $color-project-border 2px solid;
+
+  cursor: default;
+  text-align: center;
   position: relative;
   display: block;
   padding: 3px;
   z-index: 75;
-  font-size: $main-font-size * 0.8;
   margin-top: 3px;
   margin-left: 3px;
-  border: $color-project-border 2px solid;
   box-sizing: border-box;
-
-  /*
-  &:hover {
-    border-color: $color-project-border-hover;
-    background-color: $color-project-background-hover;
-    color: $color-project-foreground-hover;
-  }
-  */
 }
 
 input[type=text] {
