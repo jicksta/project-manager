@@ -4,7 +4,7 @@ function readFixture(fixtureName) {
   if (fixtureName in FIXTURE_CACHE) {
     return FIXTURE_CACHE[fixtureName];
   } else {
-    var url = "/_root__/tmp/js_dom_fixtures/" + fixtureName + ".html";
+    var url = "/__root__/tmp/js_dom_fixtures/" + fixtureName + ".html";
     FIXTURE_CACHE[fixtureName] = jQuery.ajax({
       async: false,
       url: url

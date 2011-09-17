@@ -1,7 +1,8 @@
 Gantt.Models.Project = Backbone.Model.extend({
   initialize: function(options) {
-    if(options.start_time) this.set({start_time: new Date(options.start_time)});
-    if(options.end_time) this.set({end_time: new Date(options.end_time)});
+    this.set({name: options.name || 'Untitled'});
+    this.set({start_time: options.start_time ? new Date(options.start_time) : new Date});
+    this.set({end_time: options.end_time ? new Date(options.end_time) : new Date().add(1, "day") });
   },
 
   lengthOfTimeInDays: function() {

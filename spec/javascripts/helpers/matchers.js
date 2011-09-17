@@ -1,9 +1,18 @@
+var QUACKS_LIKE = {};
+QUACKS_LIKE[Gantt.Models.Project] = function(operand) {
+  return "lengthOfTimeInDays" in operand;
+}
+
 beforeEach(function() {
   this.addMatchers({
 
     toBeCloseTo: function(number, options) {
       var delta = options.delta;
       return (this.actual >= number - delta) && (this.actual <= number + delta);
+    },
+
+    quacksLike: function(klass) {
+      return QUACKS_LIKE[klass].call(this, this.actual);
     },
 
     toHaveAttrs: function(attributes) {

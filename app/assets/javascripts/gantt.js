@@ -1,17 +1,3 @@
-function i(what) {
-  var description;
-  if(arguments.length == 2) {
-    description = what;
-    what = arguments[1];
-  }
-  if(description) {
-    console.log(description, what)
-  } else {
-    console.log(what);
-  }
-  return what;
-}
-
 var Gantt = {Views: {}, Models: {}, Collections: {}, Presenters: {}};
 _.extend(Gantt, Backbone.Events);
 
@@ -27,3 +13,7 @@ _.extend(Gantt, Backbone.Events);
   }
   
 })(Gantt);
+
+$(function() {
+  Bindings.setupTriggers(Gantt, document.body);
+});

@@ -1,4 +1,65 @@
 describe("Views.TimelineView's", function() {
+
+  describe("initialization", function() {
+
+
+    describe("with no projects", function() {
+      var view;
+
+      beforeEach(function() {
+        view = new Gantt.Views.TimelineView({
+          el: document.getElementById("jasmine_content"),
+          projects: []
+        }).render();
+      });
+
+      it("should have a numberOfWeeks of 0", function() {
+        expect(view.numberOfWeeks).toEqual(0);
+      });
+
+      it("should have a weekNumberingOffsetFromNow of 0", function() {
+        expect(view.weekNumberingOffsetFromNow).toEqual(0);
+      });
+
+    });
+
+  });
+
+  describe("handling the new-project event", function() {
+
+    var view;
+    beforeEach(function() {
+      loadFixture("main");
+      view = new Gantt.Views.TimelineView({
+        projects: [],
+        el: document.getElementById("jasmine_content")
+      }).render();
+    });
+
+    it("should add a new a new view to its 'projectViews' property and the DOM", function() {
+      expect(view.projectViews.length).toEqual(0);
+      Gantt.trigger("new-project");
+      expect(view.projectViews.length).toEqual(1);
+      var projectView = view.projectViews[0].el;
+      expect($(projectView).closest("body").get(0)).toEqual(document.body);
+    });
+
+    it("should add a new project to its 'projects' property", function() {
+      expect(view.projects.length).toEqual(0);
+      Gantt.trigger("new-project");
+      expect(view.projects.length).toEqual(1);
+    });
+
+    it("should trigger the show project event with the new project", function() {
+      var showSpy = jasmine.createSpy();
+      Gantt.bind("gantt:show-event", showSpy);
+      Gantt.trigger("new-project");
+      expect(showSpy).toHaveBeenCalled();
+      expect(showSpy.mostRecentCall.args[0]).quacksLike(Gantt.Models.Project);
+    });
+
+  });
+
   xdescribe("calculation of view width percentages", function() {
 
     var projectsData = [
@@ -10,7 +71,6 @@ describe("Views.TimelineView's", function() {
     it('should take on the width of its contained projects', function() {
       var view = new Gantt.Views.TimelineView({projects: projectsData}).render();
       var width = $(view.el).css("width");
-      console.log(width);
 //      var timelineWidth = expect(width);
 //      expect(timelineWidth).toEqual(1)
     });

@@ -2,6 +2,7 @@ var Bindings = {};
 (function(ns) {
 
   var SELECTORS = {};
+  SELECTORS.hasTrigger = "[data-triggers]";
   SELECTORS.hasBinding = "[data-binding]";
   SELECTORS.textFields = "input" + SELECTORS.hasBinding;
 
@@ -25,6 +26,7 @@ var Bindings = {};
       });
     }
 
+    // Note: Performance of this could probably be improved with low-level DOM events
     function modelChangesDirectViewChanges() {
       var elementsWithBindings = $el.find(SELECTORS.hasBinding);
       if ($el.is(SELECTORS.hasBinding)) elementsWithBindings = elementsWithBindings.andSelf();
@@ -41,6 +43,18 @@ var Bindings = {};
 
     }
 
+  };
+
+  ns.setupTriggers = function setupTriggers(bus, target) {
+    if (!target.jQuery) target = $(target);
+    target.delegate(SELECTORS.hasTrigger, {
+      click: function() {
+        var eventNames = $(this).attr("data-triggers").split(/\s+/);
+        _.each(eventNames, function(eventName) {
+          bus.trigger(eventName);
+        });
+      }
+    });
   };
 
   // JavaScript doesn't provide a literal to get an object with a dynamic key.

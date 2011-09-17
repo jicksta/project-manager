@@ -10,13 +10,20 @@ Gantt.Views.TimelineView = Backbone.View.extend({
   initialize: function(options) {
     var self = this;
 
-    _.bindAll(self, "zoomIn", "zoomOut", "render");
+    _.bindAll(self, "zoomIn", "zoomOut", "render", "_recalculateComputedProperties", "_addProjectViewFromProject");
 
     self.weeks = [];
-    self.projects = new Gantt.Collections.ProjectsCollection(options.projects);
+    self.projects = new Gantt.Collections.ProjectsCollection(options.projects || []);
 
-    self.numberOfWeeks = 1 + self.projects.latestDate().getWeek() - self.projects.earliestDate().getWeek();
-    self.weekNumberingOffsetFromNow = Gantt.now().getWeek() - self.projects.earliestDate().getWeek();
+    self._recalculateComputedProperties();
+
+    Gantt.bind("new-project", function() {
+      var project = new Gantt.Models.Project;
+      self.projects.add(project);
+      self._addProjectViewFromProject(project);
+      self._recalculateComputedProperties();
+      Gantt.trigger("gantt:show-event", project);
+    });
   },
 
   render: function() {
@@ -28,18 +35,15 @@ Gantt.Views.TimelineView = Backbone.View.extend({
 
     renderWeeks();
 
-    self.projectViews = self.projects.map(function(project) {
-      var projectView = new Gantt.Views.ProjectView({model: project});
-      self.projectsContainer.append(projectView.el);
-      return projectView;
-    });
+    self.projectViews = [];
+    self.projects.each(self._addProjectViewFromProject);
 
     self._setZoom(self.DEFAULT_WEEKS_IN_VIEW);
 
     self.projectsContainer.show();
 
-    Gantt.trigger("ShowProjectDetails", self.projects.first());
-    
+    Gantt.trigger("gantt:show-event", self.projects.first());
+
     return self;
 
     function renderWeeks() {
@@ -53,6 +57,13 @@ Gantt.Views.TimelineView = Backbone.View.extend({
         self.weeks.push(week);
       }
     }
+  },
+
+  _addProjectViewFromProject: function(project) {
+    var projectView = new Gantt.Views.ProjectView({model: project}).render();
+    this.projectsContainer.append(projectView.el);
+    this.projectViews.push(projectView);
+    return projectView;
   },
 
   zoomIn: function() {
@@ -94,5 +105,15 @@ Gantt.Views.TimelineView = Backbone.View.extend({
       return ((dateWeek - earliestWeek) * weekWidthPercentage) + dateDay * dayWidthPercentage + "%";
     }
 
+  },
+
+  _recalculateComputedProperties: function() {
+    if (this.projects.length === 0) {
+      this.numberOfWeeks = 0;
+      this.weekNumberingOffsetFromNow = 0;
+    } else {
+      this.numberOfWeeks = 1 + this.projects.latestDate().getWeek() - this.projects.earliestDate().getWeek();
+      this.weekNumberingOffsetFromNow = Gantt.now().getWeek() - this.projects.earliestDate().getWeek();
+    }
   }
 });

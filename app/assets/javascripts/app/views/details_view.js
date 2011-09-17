@@ -1,12 +1,11 @@
 Gantt.Views.DetailsView = Backbone.View.extend({
 
   events: {
-    "click #new-project": "newProject",
     "change .project-title": "_updateTitle"
   },
 
   initialize: function() {
-    _.bindAll(this, "newProject", "_updateTitle");
+    _.bindAll(this, "_updateTitle");
     this.template = _.template($("#template-project-details").html());
   },
 
@@ -20,11 +19,6 @@ Gantt.Views.DetailsView = Backbone.View.extend({
     this.titleField = this.$(".project-title");
     this._refreshFields();
     return this;
-  },
-
-  newProject: function() {
-    var project = new Gantt.Models.Project;
-    new Gantt.Views.ProjectView({model: project});
   },
 
   setProject: function(project) {
